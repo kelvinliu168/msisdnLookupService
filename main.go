@@ -15,6 +15,12 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
 	router.GET("/rest/v1/msisdn-lookup/:msisdn", func(c *gin.Context) {
 		msisdn := c.Param("msisdn")
 		// c.String(http.StatusOK, "Hello %s", msisdn)
@@ -67,6 +73,6 @@ func main() {
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
 	// router.Run()
-	endless.ListenAndServe(":8080", router)
+	endless.ListenAndServe(":80", router)
 	// router.Run(":3000") for a hard coded port
 }
